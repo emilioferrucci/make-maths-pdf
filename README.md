@@ -4,6 +4,8 @@
 
 The output is not a transcript summary. The skill reads the complete chat corpus first, identifies overlapping and branched discussions, and reorganizes their mathematical content into an organic exposition for the person who asked the original questions.
 
+The main use case is creating a persistent and coherent document that summarises the user's surveying of a new area of mathematics. User starts in chat in browser, provides sources, and surveys a particular subject interactively. Transcripts of all chats are generated e.g. with the help of a plugin. Then the Codex/ChatGPT app is used in locally to produce the document.
+
 ## What it does
 
 - reads every transcript before outlining or drafting;
