@@ -81,7 +81,23 @@ Use $make-maths-pdf to integrate the newly added transcripts in chats_variationa
 
 ## Iterative refinement
 
-After reading the generated PDF, continue using `$make-maths-pdf` to ask questions about it. Asking a question alone does not change the document. When you want the answer incorporated, request a local addition or replacement explicitly:
+After reading the generated PDF, you can ask exploratory questions without invoking the skill. This is often the most convenient workflow: discuss the document, refine your understanding, and decide which answers are worth preserving before making any changes. Keep the discussion in the same Codex task so the later editing request has access to the answers and decisions that led to it.
+
+If you want the questioning phase to follow the document's notation and context especially closely, you may invoke the skill at the start while explicitly withholding permission to edit:
+
+```text
+Use $make-maths-pdf to read the existing project in latex_topic. I am going to ask questions about it; use its notation and context, but do not edit any files until I explicitly ask.
+```
+
+This is optional. Asking questions without invoking the skill is also fine, and asking a question alone does not authorize changes to the document.
+
+When you have accumulated answers that should be preserved, explicitly invoke `$make-maths-pdf` on the editing turn. State which conclusions to incorporate, exclude exploratory ideas you rejected, and identify the affected location when possible:
+
+```text
+Use $make-maths-pdf to incorporate the conclusions from our discussion into the existing document as small, local revisions. Preserve its structure and notation, do not include exploratory ideas that I rejected, and recompile the PDF.
+```
+
+You can instead request a particular local addition or replacement:
 
 ```text
 Use $make-maths-pdf to add the explanation you just gave to the paragraph after Definition 3.2. Preserve the section structure and notation.
@@ -92,6 +108,8 @@ Use $make-maths-pdf to replace the short discussion of recurrence in Section 4 w
 ```
 
 These are refinement passes, not fresh synthesis passes. The main scope, hierarchy, order, and narrative remain anchored in the original chat transcripts. The skill integrates the new answer as ordinary mathematical prose, updates nearby transitions or citations when needed, recompiles the PDF, and leaves unrelated sections alone. If a seemingly local request would require a major redesign, it asks before proceeding.
+
+Because automatic invocation is disabled, invoke `$make-maths-pdf` explicitly on every turn that should edit and recompile the document. If you start a new Codex task, restate or provide the conclusions to incorporate because the earlier discussion may not be available there.
 
 ## Content preservation and redundancy
 
