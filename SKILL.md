@@ -26,7 +26,7 @@ Build an internal concept map and a coverage ledger across all chats before deci
 - Use the user's questions to infer their background, motivations, points of confusion, preferred explanations, and desired level of detail.
 - Detect common trunks, repeated questions, clarification loops, and overlapping passages in branched chats. Merge repeated material semantically; do not repeat a definition, explanation, or example merely because it occurs in several files.
 - Remove redundancy of expression without removing information. When several explanations overlap, combine them into one treatment that retains every unique mathematical point, nuance, example, qualification, and useful formulation contributed by any version.
-- Do not target compression or a shorter document. Unless the invocation requests omissions, preserve every distinct item in the coverage ledger except errors corrected through the clarification process.
+- Do not target compression or a shorter document. Unless the invocation requests omissions, preserve every distinct item in the coverage ledger except errors corrected under the policy below.
 - Let later follow-up questions improve earlier material. They may require a clearer explanation, a deeper treatment, a new topic, a correction, a notation change, or a different ordering.
 - Prefer the clearest, most complete, and mathematically correct version when chats contain competing explanations. Reconcile compatible versions into one exposition.
 - Organize by mathematical dependencies and pedagogical coherence, not transcript order, file order, or frequency of repetition.
@@ -39,11 +39,21 @@ Apply this priority order when resolving choices:
 3. Mathematical correctness and internal consistency.
 4. Preferences and explanations inferred from the transcripts.
 
+## Correct routine errors autonomously
+
+Do not interrupt the user over minute or mechanically resolvable issues. Correct an error autonomously when the intended form is mathematically unambiguous from the surrounding argument, the preferred sources, or direct verification, and the correction is local rather than structural. This includes:
+
+- spelling, grammar, punctuation, formatting, and export or transcription errors;
+- obvious notation slips or inconsistent symbol formatting;
+- clear local sign errors, missing constants, malformed formulas, or factual mislabels whose correction does not change the intended mathematical program.
+
+Use the corrected form in the document without discussing the source typo there. After delivery, mention a nontrivial mathematical correction briefly when useful, but do not produce an inventory of cosmetic fixes.
+
 ## Pause when clarification would improve the result
 
 After reading the whole corpus, ask focused questions without hesitation whenever the answer would materially change the document. In particular, pause before writing when:
 
-- the transcripts contain a substantive mathematical mistake; explain it concisely and propose a correction;
+- a mathematical error has more than one plausible correction, changes a definition or conclusion, affects substantial downstream content, or exposes a genuine disagreement between reliable sources; explain the issue concisely and propose the available resolution;
 - scope, notation, audience, structure, or the target section remains consequentially ambiguous;
 - sources or transcript folders have conflicting roles;
 - a requested choice conflicts with the supplied document;
@@ -118,7 +128,7 @@ On a later invocation, recover the document's original basis from the complete t
 Give the user the LaTeX project folder and the paths to its main `.tex`, `.bib`, and PDF outputs. Briefly report:
 
 - the resulting organization and any significant overlap that was consolidated;
-- mathematical corrections made with the user's approval;
+- material corrections agreed with the user and any nontrivial routine corrections made autonomously;
 - meaningful omissions or scope decisions;
 - any outside sources used because the preferred sources were insufficient;
 - unresolved issues or compilation warnings.

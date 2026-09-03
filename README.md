@@ -12,7 +12,7 @@ The main use case is creating a persistent and coherent document that captures t
 - infers the intended audience, emphasis, notation, and rigor from the questions;
 - removes repetition from overlapping or branched chats while preserving every distinct mathematical contribution;
 - lets later follow-ups improve the treatment of earlier topics;
-- asks for clarification before writing when an important choice or mathematical error needs the user's input;
+- corrects obvious local errors autonomously and asks only when a mathematical issue is genuinely ambiguous or consequential;
 - preserves an existing LaTeX project's conventions and unrelated sections;
 - keeps every document-owned file in one LaTeX project folder inside the working root;
 - supports small reader-driven refinements while preserving the transcript-derived structure;
@@ -60,7 +60,13 @@ Resolve an explicit scope choice:
 Use $make-maths-pdf on chats_derived-categories. Cover the motivation and core definitions, but do not include proofs or the discussion of enhancements.
 ```
 
-The skill may pause after reading the corpus if it finds a mathematical mistake, incompatible notation, unclear scope, or another decision that would materially affect the document.
+The skill may pause after reading the corpus if it finds an ambiguous or consequential mathematical error, incompatible notation, unclear scope, or another decision that would materially affect the document.
+
+## Corrections and clarification
+
+Routine corrections do not trigger a pre-writing question. The skill fixes spelling and formatting errors, notation slips, and mathematically unambiguous local problems such as a clear sign error or omitted constant on its own. It uses the corrected form without discussing source typos in the document and mentions only nontrivial mathematical corrections after delivery when useful.
+
+The skill pauses when there are multiple plausible corrections, a change would alter a definition or conclusion, the issue propagates through substantial later material, or reliable sources genuinely disagree. The same distinction applies to other questions: it asks readily when the answer matters, but does not seek approval for minute editorial decisions.
 
 ## Iterative refinement
 
