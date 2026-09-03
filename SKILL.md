@@ -1,6 +1,6 @@
 ---
 name: make-maths-pdf
-description: Create, revise, or incrementally refine a self-contained LaTeX mathematics project from a complete folder of ChatGPT transcript PDFs, keeping every document file in a dedicated folder within the working root. Use explicitly when the user wants overlapping or branched mathematical chats synthesized into an organic, cited PDF compiled with pdflatex, or wants small follow-up answers integrated without redesigning the transcript-derived document.
+description: Create, revise, or incrementally refine a self-contained LaTeX mathematics project from a complete folder of ChatGPT transcripts in PDF, Markdown, or other readable formats, keeping every document file in a dedicated folder within the working root. Use explicitly when the user wants overlapping or branched mathematical chats synthesized at full informational depth into an organic, cited PDF compiled with pdflatex, or wants small follow-up answers integrated without redesigning the transcript-derived document.
 ---
 
 # Make Maths PDF
@@ -13,18 +13,20 @@ Turn a corpus of mathematical chat transcripts into a persistent, coherent docum
 2. Resolve a dedicated LaTeX project folder inside the working root. Use the folder supplied at invocation. If creating a document and no folder is supplied, create `latex_<topic>` from the selected `chats_<topic>` name; when the topic or a safe folder name is unclear, ask first.
 3. Keep every document-owned file inside that LaTeX project folder: `.tex` sources, the compiled PDF, `.bib` files, figures, local styles, generated tables, included sections, and compilation artifacts. Never scatter these files across the working root, the transcript folder, or source-reference folders.
 4. Identify whether the user wants a new document or an edit to an existing project inside that folder. If several possible project folders or main `.tex` files exist, or the requested insertion point is unclear, ask before editing.
-5. Inventory user-supplied source folders, existing `.bib` files, figures, and the LaTeX project's structure. External books and articles may remain in their own source folders inside the root. Keep the working `.bib` database in the LaTeX project folder; when a bibliography is supplied elsewhere, copy or merge the needed entries into that project database without modifying the original. Do not treat supporting mathematical PDFs as chat transcripts merely because they are PDFs.
-6. Extract and read every PDF in the selected transcript folder, recursively, before outlining or writing. Use visual inspection or OCR when ordinary text extraction is incomplete. If a transcript cannot be read reliably, report that before writing.
+5. Inventory user-supplied source folders, existing `.bib` files, figures, and the LaTeX project's structure. External books and articles may remain in their own source folders inside the root. Keep the working `.bib` database in the LaTeX project folder; when a bibliography is supplied elsewhere, copy or merge the needed entries into that project database without modifying the original. Do not treat supporting mathematical files as chat transcripts merely because they share a transcript file format.
+6. Inventory and read every transcript in the selected transcript folder, recursively, before outlining or writing. Do not assume one file format: transcripts may be PDF, Markdown, plain text, HTML, or another readable format. Use the appropriate parser for each file, preserve mathematical notation during extraction, and use visual inspection or OCR when a PDF's text layer is incomplete. If any transcript format cannot be read reliably, identify the file and ask for a usable export or conversion before writing.
 7. Record the invocation's requirements about topics, exclusions, notation, organization, rigor, citations, and the target section. These instructions take priority over defaults inferred from the corpus.
 
 Do not begin drafting while some transcripts remain unread. Reading the corpus is a global analysis phase, not an incremental write-as-you-read process.
 
 ## Synthesize the whole corpus
 
-Build an internal concept map across all chats before deciding on the document structure.
+Build an internal concept map and a coverage ledger across all chats before deciding on the document structure. The ledger should record every distinct piece of substantive mathematical content, including definitions, claims, intuitions, examples, derivations, caveats, comparisons, notation choices, references, and unresolved qualifications.
 
 - Use the user's questions to infer their background, motivations, points of confusion, preferred explanations, and desired level of detail.
-- Detect common trunks and overlapping passages in branched chats. Merge repeated material semantically; do not repeat a definition, explanation, or example merely because it occurs in several files.
+- Detect common trunks, repeated questions, clarification loops, and overlapping passages in branched chats. Merge repeated material semantically; do not repeat a definition, explanation, or example merely because it occurs in several files.
+- Remove redundancy of expression without removing information. When several explanations overlap, combine them into one treatment that retains every unique mathematical point, nuance, example, qualification, and useful formulation contributed by any version.
+- Do not target compression or a shorter document. Unless the invocation requests omissions, preserve every distinct item in the coverage ledger except errors corrected through the clarification process.
 - Let later follow-up questions improve earlier material. They may require a clearer explanation, a deeper treatment, a new topic, a correction, a notation change, or a different ordering.
 - Prefer the clearest, most complete, and mathematically correct version when chats contain competing explanations. Reconcile compatible versions into one exposition.
 - Organize by mathematical dependencies and pedagogical coherence, not transcript order, file order, or frequency of repetition.
@@ -57,6 +59,7 @@ The result must read as an independently conceived mathematical text.
 - Do not include the original questions, a Q&A structure, dialogue, transcript chronology, references to chats, or phrases such as “as discussed.”
 - Do not preserve distinctive conversational sequencing or repetition from which the source questions or branching history could be reconstructed.
 - Make the document self-contained at the level appropriate to the inferred reader.
+- Aim for complete informational coverage of the selected chats, not brevity. The finished document may be as detailed as, or more detailed than, the nonredundant mathematical content of the corpus.
 - Use smooth transitions, consolidated definitions, short reminders, and connective explanations freely. Reorder material as needed.
 - Match the rigor of the transcripts. For a survey-style corpus, emphasize definitions, intuition, notation, relationships, and informative examples rather than adding many proofs.
 - Include proofs that appear in the transcripts unless the user excludes them or a correction makes them unusable. Do not add substantial proofs merely for formality.
@@ -93,6 +96,7 @@ Before finishing:
 - resolve compilation errors, undefined citations, undefined references, and materially bad layout warnings;
 - inspect the rendered PDF for clipped equations, broken tables, poor page breaks, malformed bibliography entries, and inconsistent section styling;
 - spot-check mathematical notation and cross-references against the source;
+- compare the finished source against the coverage ledger and account for every distinct substantive item not explicitly excluded or corrected;
 - ensure the document contains no conversational residue or duplicated branch material.
 
 ## Refine the document after reader questions

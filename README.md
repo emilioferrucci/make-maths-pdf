@@ -1,16 +1,16 @@
 # make-maths-pdf
 
-`make-maths-pdf` is an explicit-only Codex skill that turns a folder of mathematical ChatGPT transcript PDFs into a coherent, self-contained LaTeX document. It creates or uses a dedicated LaTeX project folder inside the working root, then keeps the source, PDF, bibliography, and other document files together there.
+`make-maths-pdf` is an explicit-only Codex skill that turns a folder of mathematical ChatGPT transcripts—in PDF, Markdown, or other readable formats—into a coherent, self-contained LaTeX document. It creates or uses a dedicated LaTeX project folder inside the working root, then keeps the source, PDF, bibliography, and other document files together there.
 
-The output is not a transcript summary. The skill reads the complete chat corpus first, identifies overlapping and branched discussions, and reorganizes their mathematical content into an organic exposition for the person who asked the original questions.
+The output is a full-content synthesis, not a condensed account. The skill reads the complete chat corpus first, identifies overlapping and branched discussions, and reorganizes all distinct mathematical content into an organic exposition for the person who asked the original questions.
 
-The main use case is creating a persistent and coherent document that summarises the user's surveying of a new area of mathematics. User starts in chat in browser, provides sources, and surveys a particular subject interactively. Transcripts of all chats are generated e.g. with the help of a plugin. Then the Codex/ChatGPT app is used in locally to produce the document.
+The main use case is creating a persistent and coherent document that captures the user's full exploration of a new area of mathematics. A typical workflow begins in browser chat: the user provides sources and surveys a subject interactively. The chats are then exported, for example with a plugin, and the Codex/ChatGPT app uses those transcripts to produce the document locally.
 
 ## What it does
 
 - reads every transcript before outlining or drafting;
 - infers the intended audience, emphasis, notation, and rigor from the questions;
-- merges duplicated material from overlapping or branched chats;
+- removes repetition from overlapping or branched chats while preserving every distinct mathematical contribution;
 - lets later follow-ups improve the treatment of earlier topics;
 - asks for clarification before writing when an important choice or mathematical error needs the user's input;
 - preserves an existing LaTeX project's conventions and unrelated sections;
@@ -25,8 +25,8 @@ The main use case is creating a persistent and coherent document that summarises
 project-root/
 |-- chats_topic-name/
 |   |-- chat-01.pdf
-|   |-- chat-02.pdf
-|   `-- branched-chat.pdf
+|   |-- chat-02.md
+|   `-- branched-chat.html
 |-- sources/
 |   |-- reference-book.pdf
 |   `-- review-article.pdf
@@ -38,7 +38,7 @@ project-root/
     `-- main.pdf
 ```
 
-Name the transcript folder `chats` or `chats_<topic>`. Supporting books and papers should live in separate folders inside the project root so they are not mistaken for transcripts. Supply an existing LaTeX project folder at invocation, or let the skill create `latex_<topic>` from the selected transcript folder. The skill does not place `.tex`, `.bib`, PDF, or build files loose in the working root.
+Name the transcript folder `chats` or `chats_<topic>`. It may contain PDF, Markdown, plain-text, HTML, or other readable transcript exports. Supporting books and papers should live in separate folders inside the project root so they are not mistaken for transcripts. Supply an existing LaTeX project folder at invocation, or let the skill create `latex_<topic>` from the selected transcript folder. The skill does not place `.tex`, `.bib`, PDF, or build files loose in the working root.
 
 ## Invocation examples
 
@@ -76,6 +76,10 @@ Use $make-maths-pdf to replace the short discussion of recurrence in Section 4 w
 
 These are refinement passes, not fresh synthesis passes. The main scope, hierarchy, order, and narrative remain anchored in the original chat transcripts. The skill integrates the new answer as ordinary mathematical prose, updates nearby transitions or citations when needed, recompiles the PDF, and leaves unrelated sections alone. If a seemingly local request would require a major redesign, it asks before proceeding.
 
+## Content preservation and redundancy
+
+The skill removes repeated expression, not mathematical information. Repeated questions, common branches, and successive clarifications are consolidated into one well-placed explanation, but every distinct definition, insight, example, caveat, comparison, derivation, and notation decision is retained unless the invocation explicitly excludes it or the user approves a correction. The resulting document is not expected to be shorter than the chats; its purpose is completeness without repetition.
+
 ## Best practices
 
 - State the target transcript folder when more than one is present.
@@ -87,7 +91,7 @@ These are refinement passes, not fresh synthesis passes. The main scope, hierarc
 - Specify notation when you have a strong preference. Otherwise, the skill selects and normalizes a convention based on the chats and any existing document.
 - Mention unusual expectations about rigor, length, proofs, examples, or citations. By default, the skill matches the transcripts' level and keeps proofs that the chats actually develop.
 - For follow-up revisions, identify the paragraph, definition, theorem, or section to change when possible, and say whether the new answer should be added or should replace existing prose.
-- Supply text-extractable PDFs when possible. Scanned or damaged transcripts may require OCR and can lead to a clarification request.
+- Supply readable transcript exports. Markdown and other text-based formats work directly; scanned or damaged PDFs may require OCR and can lead to a clarification request.
 - Keep a backup or version-control commit before asking the skill to edit an existing `.tex` file; its default behavior is to modify that source directly.
 
 ## Citations
