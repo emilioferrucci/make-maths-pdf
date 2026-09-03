@@ -1,6 +1,6 @@
 ---
 name: make-maths-pdf
-description: Create or revise a self-contained LaTeX mathematics document from a complete folder of ChatGPT transcript PDFs. Use explicitly when the user wants overlapping or branched mathematical chats synthesized into an organic, cited document and compiled with pdflatex, rather than summarized as conversations.
+description: Create or revise a self-contained LaTeX mathematics project from a complete folder of ChatGPT transcript PDFs, keeping every document file in a dedicated folder within the working root. Use explicitly when the user wants overlapping or branched mathematical chats synthesized into an organic, cited PDF compiled with pdflatex, rather than summarized as conversations.
 ---
 
 # Make Maths PDF
@@ -10,10 +10,12 @@ Turn a corpus of mathematical chat transcripts into a persistent, coherent docum
 ## Establish the assignment
 
 1. Resolve the working root and the selected transcript folder. Transcript folders are named `chats` or `chats_<topic>`. If more than one could apply and the invocation does not select one, ask which to use.
-2. Identify whether the user wants a new document or an edit to an existing `.tex` document. If several possible main files exist or the requested insertion point is unclear, ask before editing.
-3. Inventory user-supplied source folders, existing `.bib` files, figures, and the LaTeX project's structure. Do not treat supporting mathematical PDFs as chat transcripts merely because they are PDFs.
-4. Extract and read every PDF in the selected transcript folder, recursively, before outlining or writing. Use visual inspection or OCR when ordinary text extraction is incomplete. If a transcript cannot be read reliably, report that before writing.
-5. Record the invocation's requirements about topics, exclusions, notation, organization, rigor, citations, and the target section. These instructions take priority over defaults inferred from the corpus.
+2. Resolve a dedicated LaTeX project folder inside the working root. Use the folder supplied at invocation. If creating a document and no folder is supplied, create `latex_<topic>` from the selected `chats_<topic>` name; when the topic or a safe folder name is unclear, ask first.
+3. Keep every document-owned file inside that LaTeX project folder: `.tex` sources, the compiled PDF, `.bib` files, figures, local styles, generated tables, included sections, and compilation artifacts. Never scatter these files across the working root, the transcript folder, or source-reference folders.
+4. Identify whether the user wants a new document or an edit to an existing project inside that folder. If several possible project folders or main `.tex` files exist, or the requested insertion point is unclear, ask before editing.
+5. Inventory user-supplied source folders, existing `.bib` files, figures, and the LaTeX project's structure. External books and articles may remain in their own source folders inside the root. Keep the working `.bib` database in the LaTeX project folder; when a bibliography is supplied elsewhere, copy or merge the needed entries into that project database without modifying the original. Do not treat supporting mathematical PDFs as chat transcripts merely because they are PDFs.
+6. Extract and read every PDF in the selected transcript folder, recursively, before outlining or writing. Use visual inspection or OCR when ordinary text extraction is incomplete. If a transcript cannot be read reliably, report that before writing.
+7. Record the invocation's requirements about topics, exclusions, notation, organization, rigor, citations, and the target section. These instructions take priority over defaults inferred from the corpus.
 
 Do not begin drafting while some transcripts remain unread. Reading the corpus is a global analysis phase, not an incremental write-as-you-read process.
 
@@ -61,7 +63,7 @@ The result must read as an independently conceived mathematical text.
 - Normalize notation throughout. Follow invocation-specific notation first, then the supplied project's notation; otherwise select one coherent convention informed by the chats.
 - Do not broaden the mathematical program merely because external references contain related material.
 
-For an existing project, edit the supplied `.tex` source directly, preserve unrelated material, match its macros and style, and integrate the new prose into the requested section. For a new document, default to a clean `article`-class file using pdflatex-compatible mathematics packages, omit the author unless supplied, and choose a structure suited to the topic.
+For an existing project folder, edit the supplied `.tex` source directly, preserve unrelated material, match its macros and style, and integrate the new prose into the requested section. For a new project folder, default to a clean `article`-class main file using pdflatex-compatible mathematics packages, omit the author unless supplied, and choose a structure suited to the topic. Keep the main source, included sources, bibliography, and PDF together within that folder hierarchy.
 
 ## Use citations and BibTeX by default
 
@@ -79,10 +81,10 @@ External sources may also be consulted for verification. If they reveal a materi
 
 ## Compile and verify
 
-Compile with `pdflatex` and BibTeX. The bundled `scripts/build_pdf.sh` performs the normal compilation sequence and fails on unresolved references or citations:
+Compile with `pdflatex` and BibTeX from the LaTeX project folder so that the PDF and all compilation artifacts remain there. The bundled `scripts/build_pdf.sh` performs the normal compilation sequence and fails on unresolved references or citations:
 
 ```bash
-scripts/build_pdf.sh path/to/main.tex
+scripts/build_pdf.sh project-root/latex_topic/main.tex
 ```
 
 Before finishing:
@@ -95,7 +97,7 @@ Before finishing:
 
 ## Report the result
 
-Give the user the paths to the `.tex`, `.bib`, and PDF outputs. Briefly report:
+Give the user the LaTeX project folder and the paths to its main `.tex`, `.bib`, and PDF outputs. Briefly report:
 
 - the resulting organization and any significant overlap that was consolidated;
 - mathematical corrections made with the user's approval;
