@@ -15,6 +15,7 @@ The main use case is creating a persistent and coherent document that summarises
 - asks for clarification before writing when an important choice or mathematical error needs the user's input;
 - preserves an existing LaTeX project's conventions and unrelated sections;
 - keeps every document-owned file in one LaTeX project folder inside the working root;
+- supports small reader-driven refinements while preserving the transcript-derived structure;
 - uses user-supplied sources and BibTeX citations by default;
 - compiles with `pdflatex` and checks the resulting PDF.
 
@@ -61,6 +62,20 @@ Use $make-maths-pdf on chats_derived-categories. Cover the motivation and core d
 
 The skill may pause after reading the corpus if it finds a mathematical mistake, incompatible notation, unclear scope, or another decision that would materially affect the document.
 
+## Iterative refinement
+
+After reading the generated PDF, continue using `$make-maths-pdf` to ask questions about it. Asking a question alone does not change the document. When you want the answer incorporated, request a local addition or replacement explicitly:
+
+```text
+Use $make-maths-pdf to add the explanation you just gave to the paragraph after Definition 3.2. Preserve the section structure and notation.
+```
+
+```text
+Use $make-maths-pdf to replace the short discussion of recurrence in Section 4 with the clearer explanation from your last answer.
+```
+
+These are refinement passes, not fresh synthesis passes. The main scope, hierarchy, order, and narrative remain anchored in the original chat transcripts. The skill integrates the new answer as ordinary mathematical prose, updates nearby transitions or citations when needed, recompiles the PDF, and leaves unrelated sections alone. If a seemingly local request would require a major redesign, it asks before proceeding.
+
 ## Best practices
 
 - State the target transcript folder when more than one is present.
@@ -71,6 +86,7 @@ The skill may pause after reading the corpus if it finds a mathematical mistake,
 - Say which topics to include or exclude. This is especially useful when chats wander into interesting but nonessential side topics.
 - Specify notation when you have a strong preference. Otherwise, the skill selects and normalizes a convention based on the chats and any existing document.
 - Mention unusual expectations about rigor, length, proofs, examples, or citations. By default, the skill matches the transcripts' level and keeps proofs that the chats actually develop.
+- For follow-up revisions, identify the paragraph, definition, theorem, or section to change when possible, and say whether the new answer should be added or should replace existing prose.
 - Supply text-extractable PDFs when possible. Scanned or damaged transcripts may require OCR and can lead to a clarification request.
 - Keep a backup or version-control commit before asking the skill to edit an existing `.tex` file; its default behavior is to modify that source directly.
 

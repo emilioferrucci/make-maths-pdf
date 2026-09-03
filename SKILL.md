@@ -1,6 +1,6 @@
 ---
 name: make-maths-pdf
-description: Create or revise a self-contained LaTeX mathematics project from a complete folder of ChatGPT transcript PDFs, keeping every document file in a dedicated folder within the working root. Use explicitly when the user wants overlapping or branched mathematical chats synthesized into an organic, cited PDF compiled with pdflatex, rather than summarized as conversations.
+description: Create, revise, or incrementally refine a self-contained LaTeX mathematics project from a complete folder of ChatGPT transcript PDFs, keeping every document file in a dedicated folder within the working root. Use explicitly when the user wants overlapping or branched mathematical chats synthesized into an organic, cited PDF compiled with pdflatex, or wants small follow-up answers integrated without redesigning the transcript-derived document.
 ---
 
 # Make Maths PDF
@@ -94,6 +94,20 @@ Before finishing:
 - inspect the rendered PDF for clipped equations, broken tables, poor page breaks, malformed bibliography entries, and inconsistent section styling;
 - spot-check mathematical notation and cross-references against the source;
 - ensure the document contains no conversational residue or duplicated branch material.
+
+## Refine the document after reader questions
+
+Treat questions asked after delivery as a normal iterative mode. The user may ask about the PDF, then ask for the answer to be added or for a small passage to be replaced.
+
+- Answer a question in the conversation without changing files unless the user asks for a document edit.
+- When an edit is requested, make the smallest coherent change that incorporates the answer. Read the surrounding source and relevant mathematical context before editing.
+- Integrate new material as organic exposition, not as a pasted answer, Q&A, addendum, or record of the follow-up conversation.
+- Preserve the document's transcript-derived architecture: its principal scope, section hierarchy, ordering, narrative progression, and notation should remain stable.
+- Do not re-outline the document, rename or reorder unrelated sections, change global notation, or broadly rewrite prose merely because a local improvement is possible.
+- Adjust nearby transitions, definitions, citations, labels, and cross-references when needed to make the local edit read naturally and remain correct.
+- If the requested “small” change would actually require a major restructuring or conflict with the transcript-derived program, explain this and ask whether the user wants a constrained local treatment or an explicit larger revision.
+
+On a later invocation, recover the document's original basis from the complete transcript corpus before editing unless that full-corpus analysis has already been completed in the active context and the inputs have not changed. After every document edit, recompile and verify the PDF. Briefly identify which passage changed without turning the report into a new transcript history.
 
 ## Report the result
 
