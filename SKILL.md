@@ -1,6 +1,6 @@
 ---
 name: make-maths-pdf
-description: Create, revise, or incrementally refine a self-contained LaTeX mathematics project from a complete folder of ChatGPT transcripts in PDF, Markdown, or other readable formats, keeping every document file in a dedicated folder within the working root. Use explicitly when the user wants overlapping or branched mathematical chats synthesized at full informational depth into an organic, cited PDF compiled with pdflatex, or wants small follow-up answers integrated without redesigning the transcript-derived document.
+description: Build and revise self-contained, cited LaTeX mathematics projects from complete ChatGPT transcript corpora in PDF, Markdown, or other readable formats. Use explicitly to synthesize overlapping or branched chats at full informational depth, integrate new chats into existing material with targeted rewriting, or make small reader-driven refinements; compile with pdflatex and keep project files together inside the working root.
 ---
 
 # Make Maths PDF
@@ -78,6 +78,19 @@ The result must read as an independently conceived mathematical text.
 
 For an existing project folder, edit the supplied `.tex` source directly, preserve unrelated material, match its macros and style, and integrate the new prose into the requested section. For a new project folder, default to a clean `article`-class main file using pdflatex-compatible mathematics packages, omit the author unless supplied, and choose a structure suited to the topic. Keep the main source, included sources, bibliography, and PDF together within that folder hierarchy.
 
+## Integrate overlapping new transcripts into existing material
+
+Use this mode when the user explicitly says that one or more transcripts overlap significantly with material already written in LaTeX, or that the new material needs careful integration rather than being added on top.
+
+1. Read the complete selected transcript corpus and the existing LaTeX project before editing. If the user identifies a subset as newly added, distinguish it while retaining the whole-corpus context.
+2. Build a correspondence map between the new material and the existing exposition. Classify each distinct contribution as already covered equivalently, complementary, a clearer or more complete replacement, a correction or conflict, or genuinely new.
+3. Choose the best location and treatment for every contribution. Retain equivalent existing material without duplicating it; merge complementary details; replace weaker or inaccurate passages; distribute material across existing sections when mathematical dependencies require it; create a new subsection only when the content is genuinely new and does not fit organically elsewhere.
+4. Rewrite affected paragraphs, subsections, or sections as needed so the result reads as a single planned exposition. The user's explicit integration request authorizes these targeted rewrites; do not seek approval merely because careful integration requires replacing existing prose.
+5. Preserve every distinct mathematical contribution from both the existing document and the new transcripts unless the user explicitly requests an omission or the correction policy applies. Preserve unrelated sections and the project's overall voice.
+6. Reconcile notation, citations, labels, theorem numbering, definitions, and cross-references across the affected material. Review the complete affected narrative arc for duplicated explanations, seams, broken dependencies, and contradictions.
+
+Ask before proceeding when integration would materially change the document's global scope or architecture, require a global notation change, discard nonredundant existing content, or present several genuinely different structural choices with important consequences. Otherwise make the best editorial integration autonomously.
+
 ## Use citations and BibTeX by default
 
 Create a properly cited document unless the user explicitly asks for a citation-free treatment.
@@ -123,11 +136,14 @@ Treat questions asked after delivery as a normal iterative mode. The user may as
 
 On a later invocation, recover the document's original basis from the complete transcript corpus before editing unless that full-corpus analysis has already been completed in the active context and the inputs have not changed. After every document edit, recompile and verify the PDF. Briefly identify which passage changed without turning the report into a new transcript history.
 
+These constraints apply to ordinary reader-question refinements. They do not prohibit the broader targeted rewriting described in the integration mode above when the user explicitly identifies new overlapping transcripts.
+
 ## Report the result
 
 Give the user the LaTeX project folder and the paths to its main `.tex`, `.bib`, and PDF outputs. Briefly report:
 
 - the resulting organization and any significant overlap that was consolidated;
+- for an integration pass, the principal regions merged, replaced, or redistributed;
 - material corrections agreed with the user and any nontrivial routine corrections made autonomously;
 - meaningful omissions or scope decisions;
 - any outside sources used because the preferred sources were insufficient;

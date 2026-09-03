@@ -15,6 +15,7 @@ The main use case is creating a persistent and coherent document that captures t
 - corrects obvious local errors autonomously and asks only when a mathematical issue is genuinely ambiguous or consequential;
 - preserves an existing LaTeX project's conventions and unrelated sections;
 - keeps every document-owned file in one LaTeX project folder inside the working root;
+- carefully integrates new overlapping transcripts into existing LaTeX, rewriting affected material when needed;
 - supports small reader-driven refinements while preserving the transcript-derived structure;
 - uses user-supplied sources and BibTeX citations by default;
 - compiles with `pdflatex` and checks the resulting PDF.
@@ -68,6 +69,16 @@ Routine corrections do not trigger a pre-writing question. The skill fixes spell
 
 The skill pauses when there are multiple plausible corrections, a change would alter a definition or conclusion, the issue propagates through substantial later material, or reliable sources genuinely disagree. The same distinction applies to other questions: it asks readily when the answer matters, but does not seek approval for minute editorial decisions.
 
+## Integrating overlapping new transcripts
+
+Sometimes new transcripts revisit material that is already present in the LaTeX project. When this is stated explicitly, the skill does not append the new account after the old one. It compares the new material with the existing exposition, preserves the strongest treatment of shared content, merges complementary details, replaces weaker passages, and redistributes genuinely new material to the sections where it belongs.
+
+This mode may rewrite affected paragraphs, subsections, or sections so the document continues to read as one planned work. It preserves nonredundant content from both the old document and the new transcripts, leaves unrelated regions alone, and reconciles notation, citations, labels, and cross-references. It asks before making a global structural or notation change, but not before ordinary targeted rewriting needed for a clean integration.
+
+```text
+Use $make-maths-pdf to integrate the newly added transcripts in chats_variational-bayes into the existing project in latex_variational-bayes. They overlap heavily with Sections 2–4, so do not append them as new material; rewrite the affected sections where needed while preserving all nonredundant content.
+```
+
 ## Iterative refinement
 
 After reading the generated PDF, continue using `$make-maths-pdf` to ask questions about it. Asking a question alone does not change the document. When you want the answer incorporated, request a local addition or replacement explicitly:
@@ -96,6 +107,7 @@ The skill removes repeated expression, not mathematical information. Repeated qu
 - Say which topics to include or exclude. This is especially useful when chats wander into interesting but nonessential side topics.
 - Specify notation when you have a strong preference. Otherwise, the skill selects and normalizes a convention based on the chats and any existing document.
 - Mention unusual expectations about rigor, length, proofs, examples, or citations. By default, the skill matches the transcripts' level and keeps proofs that the chats actually develop.
+- When new transcripts overlap existing LaTeX, say so explicitly and identify the existing project or affected sections if known; this activates careful integration instead of ordinary addition.
 - For follow-up revisions, identify the paragraph, definition, theorem, or section to change when possible, and say whether the new answer should be added or should replace existing prose.
 - Supply readable transcript exports. Markdown and other text-based formats work directly; scanned or damaged PDFs may require OCR and can lead to a clarification request.
 - Keep a backup or version-control commit before asking the skill to edit an existing `.tex` file; its default behavior is to modify that source directly.
