@@ -1,0 +1,7 @@
+interface:
+  display_name: "Make Maths PDF"
+  short_description: "Turn maths chat transcripts into polished LaTeX"
+  default_prompt: "Use $make-maths-pdf to synthesize the selected maths chat transcripts into a coherent, cited LaTeX document and compiled PDF."
+
+policy:
+  allow_implicit_invocation: false
