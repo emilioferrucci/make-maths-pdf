@@ -4,7 +4,9 @@
 
 The output is a full-content synthesis, not a condensed account. The skill reads the complete chat corpus first, identifies overlapping and branched discussions, and reorganizes all distinct mathematical content into an organic exposition for the person who asked the original questions.
 
-The main use case is creating a persistent and coherent document that captures the user's full exploration of a new area of mathematics. A typical workflow begins in browser chat: the user provides sources and surveys a subject interactively. The chats are then exported, for example with a plugin, and the Codex/ChatGPT app uses those transcripts to produce the document locally.
+The main use case is efficiently creating a persistent and coherent document that captures the user's full exploration of a new area of mathematics. A typical workflow begins in browser chat: the user provides sources and surveys a subject interactively. The chats are then exported, for example with a plugin, and the Codex/ChatGPT app uses those transcripts to produce the document locally.
+
+This skill is not intended to write a paper to be published or made widely available. For this, the author should be much more closely involved in the writing of the document, even if the ideas are developed in collaboration with AI. The document that is produced should be treated as a curated and personalised treatment of the material in question, to be used as reference, re-fed to AI for follow up questions and discussion, etc.; it is typically not the end product.
 
 ## What it does
 
