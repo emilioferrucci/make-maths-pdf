@@ -12,6 +12,7 @@ This skill is not intended to write a paper to be published or made widely avail
 
 - reads every transcript before outlining or drafting;
 - infers the intended audience, emphasis, notation, and rigor from the questions;
+- distinguishes raw conversational repetition from intentional requests for greater or lesser depth;
 - removes repetition from overlapping or branched chats while preserving every distinct mathematical contribution;
 - lets later follow-ups improve the treatment of earlier topics;
 - corrects obvious local errors autonomously and asks only when a mathematical issue is genuinely ambiguous or consequential;
@@ -113,9 +114,11 @@ These are refinement passes, not fresh synthesis passes. The main scope, hierarc
 
 Because automatic invocation is disabled, invoke `$make-maths-pdf` explicitly on every turn that should edit and recompile the document. If you start a new Codex task, restate or provide the conclusions to incorporate because the earlier discussion may not be available there.
 
-## Content preservation and redundancy
+## Content preservation, emphasis, and redundancy
 
 The skill removes repeated expression, not mathematical information. Repeated questions, common branches, and successive clarifications are consolidated into one well-placed explanation, but every distinct definition, insight, example, caveat, comparison, derivation, and notation decision is retained unless the invocation explicitly excludes it or the user approves a correction. The resulting document is not expected to be shorter than the chats; its purpose is completeness without repetition.
+
+The amount of transcript space devoted to a topic does not by itself determine how much space it receives in the document. Repeated attempts to clear up one difficulty or a temporary rabbit hole may need only a clear, proportionate treatment. Intentional depth signals do matter: remarks such as “we can go faster through this part” call for a more compressed account, while requests for details, derivations, or examples call for a fuller one. When a topic deserves less emphasis, the skill should compress it rather than omit an in-scope concept.
 
 ## Best practices
 
